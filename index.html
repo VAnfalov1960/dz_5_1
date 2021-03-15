@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type "text/css" href="style.css"/>
+    <title>dz1</title>
+  </head>
+  <body>
+    <!-- ======================================== -->
+    <!-- КАЛЬКУЛЯТОР ДАТ -->
+    <br />
+    <div class="dropdown">
+      <button onclick="datecalc()" class="dropbtn">Калькулятор дат</button>
+      <div id="calc" class="dropdown-content">
+        <form id="datecalc">
+          <h3>Калькулятор дат</h3>
+          <label>
+            <strong>Первая дата:</strong>
+            <input type="date" name="firstDate" />
+          </label>
+          <br /><br />
+          <label>
+            <strong>Вторая дата:</strong>
+            <input type="date" name="secondDate" />
+          </label>
+          <br /><br />
+          <button type="submit">Рассчитать промежуток</button>
+          <p id="datecalc__result"></p>
+        </form>
+      </div>
+    </div>
+    <div id="second_hide2" style="display: none">
+      <p>Text</p>
+    </div>
+    <script src="./src/main_calc.js" type="module"></script>
+    <!-- ======================================== -->
+    <!-- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА -->
+    <div class="dropdown">
+      <button onclick="countdown_timer()" class="dropbtn">
+        Таймер обратного отсчёта
+      </button>
+      <div id="timer" class="dropdown-content">
+        <form id="countdown_timer">
+          <h3>Таймер обратного отсчета</h3>
+          <strong>Выберите время:</strong>
+          <label for="time_countdown_timer">
+            <input
+              type="time"
+              id="time_countdown_timer"
+              name="time_countdown_timer"
+              min="00:01"
+              max="23:59"
+              required
+            />
+          </label>
+          <br /><br />
+          <button id="start_countdown_timer" onclick="countdown()">
+            Старт / Стоп
+          </button>
+          <p id="result_countdown_timer"></p>
+        </form>
+      </div>
+    </div>
+    <script src="./src/main_calc.js" type="module"></script>
+    <!-- ======================================== -->
+    <!-- Вынес в файл swith.js - подключить -->
+    <script>
+      function datecalc() {
+        document.getElementById("calc").classList.toggle("show");
+      }
+      function countdown_timer() {
+        document.getElementById("timer").classList.toggle("show");
+      }
+    </script>
+    <!-- ======================================== -->
+    <!-- Вынес в файл countdown_timer - подключить -->
+    <script>
+      let timer;
+      let x = 10; // взять из формы
+      function countdown() {
+        document.getElementById("result_countdown_timer").innerHTML = x;
+        x--; // уменьшаем число на единицу
+        if (x < 0) {
+          clearTimeout(timer); // таймер остановится на нуле
+          snd.play(); // вызываем звуковой сигнал
+        } else {
+          timer = setTimeout(countdown, 1000);
+        }
+      }
+    </script>
+    <!-- ======================================== -->
+    <!-- Звуковой сигнал - вывел в отдельный файл audio.js - подключить -->
+    <script>
+      var snd = new Audio("./audio/zv1.mp3");
+    </script>
+    <!-- ======================================== -->
+  </body>
+</html>
